@@ -3,6 +3,7 @@
 #define GRAFO_H
 
 #include <vector>
+#include "Aresta.h"
 
 class Grafo
 {
@@ -12,8 +13,12 @@ public:
     int num_vertices();
     int num_arestas();
 
+    bool tem_aresta(Aresta e);
+    void inserir_aresta(Aresta e);
+    void remover_aresta(Aresta e);
+
 private:
-    vector<vector<int>> matriz_adj_;
+    std::vector<std::vector<int>> matriz_adj_;
     int num_vertices_;
     int num_arestas_;
 };
