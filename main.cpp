@@ -7,19 +7,16 @@ int main()
 {
     try
     {
-        /*int count;
-        for (count = 0; count < 2; count++)
-        {
-            double raio;
+        //int vertices;
 
-            cout << "Digite o raio do circulo " << count + 1 << ": ";
-            cin >> raio;
+        //cout << "Digite a quantidade de vértices para o Grafo: ";
+        //cin >> vertices;
 
-            Circulo circulo(raio);
+        Grafo g(6);
+        Aresta e(1, 3);
 
-            circulo.imprime_area();
-            circulo.imprime_perimetro();
-        }*/
+
+        cout << "Tem aresta em (" << e.v1 << "," << e.v2 << "): " << g.tem_aresta(e) << "\n";
     }
     catch (const exception &e)
     {
