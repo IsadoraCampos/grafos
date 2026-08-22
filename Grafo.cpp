@@ -33,7 +33,8 @@ int Grafo::num_arestas()
 
 bool Grafo::tem_aresta(Aresta e)
 {
-    if (matriz_adj_[e.v1][e.v2] != 0) {
+    if (matriz_adj_[e.v1][e.v2] != 0)
+    {
         return true;
     }
 
@@ -43,12 +44,14 @@ bool Grafo::tem_aresta(Aresta e)
 void Grafo::inserir_aresta(Aresta e)
 {
     // Aresta já existe
-    if (tem_aresta(e)) {
+    if (tem_aresta(e))
+    {
         return;
     }
 
     // Laço na aresta
-    if (e.v1 == e.v2) {
+    if (e.v1 == e.v2)
+    {
         return;
     }
 
@@ -59,11 +62,29 @@ void Grafo::inserir_aresta(Aresta e)
 
 void Grafo::remover_aresta(Aresta e)
 {
-    if (!tem_aresta(e)) {
+    if (!tem_aresta(e))
+    {
         return;
     }
 
     matriz_adj_[e.v1][e.v2] = 0;
     matriz_adj_[e.v2][e.v1] = 0;
     num_arestas_--;
+}
+
+void Grafo::imprime()
+{
+    cout << "Grafo: \n";
+    for (int v = 0; v < num_vertices_; v++)
+    {
+        cout << v << ": ";
+        for (int u = 0; u < num_vertices_; u++)
+        {
+            if (matriz_adj_[v][u] != 0)
+            {
+                cout << u << " ";
+            }
+        }
+        cout << "\n";
+    }
 }

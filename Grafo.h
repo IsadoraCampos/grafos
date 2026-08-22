@@ -17,6 +17,8 @@ public:
     void inserir_aresta(Aresta e);
     void remover_aresta(Aresta e);
 
+    void imprime();
+
 private:
     std::vector<std::vector<int>> matriz_adj_;
     int num_vertices_;
