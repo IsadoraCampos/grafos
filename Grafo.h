@@ -19,6 +19,9 @@ public:
 
     void imprime();
 
+    bool eh_passeio(std::vector<int> vertices);
+    bool eh_vizinho(int v1, int v2);
+
 private:
     std::vector<std::vector<int>> matriz_adj_;
     int num_vertices_;

@@ -13,16 +13,35 @@ int main()
         // cin >> vertices;
 
         Grafo g(6);
-        Aresta e(1, 3);
-        Aresta e2(3, 1);
+        Aresta a1(0, 1);
+        Aresta a2(0, 2);
+        Aresta a3(0, 4);
 
-        cout << "Tem aresta em (" << e.v1 << "," << e.v2 << "): " << g.tem_aresta(e) << "\n";
-        g.inserir_aresta(e);
-        cout << "Tem aresta em (" << e.v1 << "," << e.v2 << "): " << g.tem_aresta(e) << "\n";
-        cout << "Tem aresta em (" << e2.v1 << "," << e2.v2 << "): " << g.tem_aresta(e2) << "\n";
-        cout << "Tem aresta em (" << e.v1 << "," << e.v2 << "): " << g.tem_aresta(e) << "\n";
-        cout << "Tem aresta em (" << e2.v1 << "," << e2.v2 << "): " << g.tem_aresta(e2) << "\n";
+        Aresta a4(1, 3);
+        Aresta a5(1, 4);
+
+        Aresta a6(2, 4);
+        Aresta a7(3, 4);
+        Aresta a8(3, 5);
+
+        g.inserir_aresta(a1);
+        g.inserir_aresta(a2);
+        g.inserir_aresta(a3);
+        g.inserir_aresta(a4);
+        g.inserir_aresta(a5);
+        g.inserir_aresta(a6);
+        g.inserir_aresta(a7);
+        g.inserir_aresta(a8);
+
         g.imprime();
+        if (g.eh_passeio({2, 0, 4, 1, 0, 4, 3}))
+        {
+            cout << "Grafo é um passeio! \n";
+        }
+        else
+        {
+            cout << "Grafo não é um passeio! \n";
+        }
     }
     catch (const exception &e)
     {

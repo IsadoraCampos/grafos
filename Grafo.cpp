@@ -1,5 +1,6 @@
 #include "Grafo.h"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -87,4 +88,29 @@ void Grafo::imprime()
         }
         cout << "\n";
     }
+}
+
+bool Grafo::eh_vizinho(int v1, int v2)
+{
+    if (matriz_adj_[v1][v2] != 0 || matriz_adj_[v2][v1] != 0)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool Grafo::eh_passeio(vector<int> vertices)
+{
+    for (size_t i = 0; i < vertices.size() - 1; i++)
+    {
+        cout << "Vertice 1: " << vertices[i] << "\n";
+        cout << "Vertice 2: " << vertices[i + 1] << "\n";
+        if (!eh_vizinho(vertices[i], vertices[i + 1]))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
