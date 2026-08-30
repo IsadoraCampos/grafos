@@ -104,8 +104,6 @@ bool Grafo::eh_passeio(vector<int> vertices)
 {
     for (size_t i = 0; i < vertices.size() - 1; i++)
     {
-        cout << "Vertice 1: " << vertices[i] << "\n";
-        cout << "Vertice 2: " << vertices[i + 1] << "\n";
         if (!eh_vizinho(vertices[i], vertices[i + 1]))
         {
             return false;
@@ -113,4 +111,42 @@ bool Grafo::eh_passeio(vector<int> vertices)
     }
 
     return true;
+}
+
+bool Grafo::eh_caminho(int v1, int v2, int marcado[], int chamadas)
+{
+    imprimir_caminho(v1, v2, chamadas);
+
+    if (v1 == v2)
+    {
+        return true;
+    }
+
+    marcado[v1] = 1;
+    for (int u = 0; u < num_vertices_; u++)
+    {
+        if (eh_vizinho(v1, u))
+        {
+            if (marcado[u] == 0)
+            {
+                chamadas++;
+                if (eh_caminho(u, v2, marcado, chamadas))
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+void Grafo::imprimir_caminho(int v1, int v2, int chamadas)
+{
+    for (int i = 0; i < chamadas; i++)
+    {
+        cout << "--";
+    }
+
+    cout << "eh_caminho(" << v1 << ", " << v2 << ")" << "\n";
 }
