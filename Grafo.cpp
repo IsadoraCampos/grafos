@@ -150,3 +150,37 @@ void Grafo::imprimir_caminho(int v1, int v2, int chamadas)
 
     cout << "eh_caminho(" << v1 << ", " << v2 << ")" << "\n";
 }
+
+void Grafo::busca_profundidade(int v, std::vector<int> &marcado)
+{
+    printf("%d\n", v);
+    marcado[v] = 1;
+
+    for (int u = 0; u < num_vertices_; u++)
+    {
+        if (eh_vizinho(v, u))
+        {
+            if (marcado[u] == 0)
+            {
+                printf("%d -> %d\n", v, u);
+                busca_profundidade(u, marcado);
+            }
+        }
+    }
+}
+
+bool Grafo::eh_conexo()
+{
+    std::vector<int> marcado(num_vertices_, 0);
+    busca_profundidade(0, marcado);
+
+    for (int i = 0; i < num_vertices_; i++)
+    {
+        if (marcado[i] == 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}

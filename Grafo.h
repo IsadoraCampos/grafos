@@ -22,6 +22,9 @@ public:
     bool eh_passeio(std::vector<int> vertices);
     bool eh_vizinho(int v1, int v2);
     bool eh_caminho(int v1, int v2, int marcado[], int chamadas);
+    bool eh_conexo();
+
+    void busca_profundidade(int v, std::vector<int> &marcado);
 
 private:
     std::vector<std::vector<int>> matriz_adj_;
