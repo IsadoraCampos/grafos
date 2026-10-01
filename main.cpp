@@ -49,8 +49,9 @@ int main()
         {
             cout << "Grafo não é um caminho! \n";
         }*/
-        vector<int> marcado(g.num_vertices(), 0);
-        g.busca_profundidade(0, marcado);
+        // vector<int> marcado(g.num_vertices(), 0);
+        // g.busca_profundidade(0, marcado);
+        g.busca_largura(0, 3);
     }
     catch (const exception &e)
     {

@@ -1,6 +1,7 @@
 #include "Grafo.h"
 #include <iostream>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -183,4 +184,40 @@ bool Grafo::eh_conexo()
     }
 
     return true;
+}
+
+void Grafo::busca_largura(int v, int timeToLive)
+{
+    printf("time to live: %d\n", timeToLive);
+    queue<int> fila;
+    std::vector<int> marcado(num_vertices_, 0);
+    std::vector<int> pai(num_vertices_, -1);
+    std::vector<int> distancia(num_vertices_, -1);
+    std::vector<int> vetoresNaoVisitados(num_vertices_, 0);
+
+    marcado[v] = 1;
+    pai[v] = -1;
+    distancia[v] = 0;
+    fila.push(v);
+
+    while (!fila.empty())
+    {
+        int w = fila.front();
+        fila.pop();
+
+        printf("%d\n", w);
+        for (int u = 0; u < num_vertices_; u++)
+        {
+            if (eh_vizinho(w, u))
+            {
+                if (marcado[u] == 0)
+                {
+                    marcado[u] = 1;
+                    pai[u] = w;
+                    distancia[u] = distancia[w] + 1;
+                    fila.push(u);
+                }
+            }
+        }
+    }
 }

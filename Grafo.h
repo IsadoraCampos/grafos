@@ -25,6 +25,7 @@ public:
     bool eh_conexo();
 
     void busca_profundidade(int v, std::vector<int> &marcado);
+    void busca_largura(int v, int timeToLive);
 
 private:
     std::vector<std::vector<int>> matriz_adj_;
