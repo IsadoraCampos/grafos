@@ -186,14 +186,14 @@ bool Grafo::eh_conexo()
     return true;
 }
 
-void Grafo::busca_largura(int v, int timeToLive)
+std::vector<int> Grafo::busca_largura(int v, int timeToLive)
 {
-    printf("time to live: %d\n", timeToLive);
+
     queue<int> fila;
     std::vector<int> marcado(num_vertices_, 0);
     std::vector<int> pai(num_vertices_, -1);
     std::vector<int> distancia(num_vertices_, -1);
-    std::vector<int> vetoresNaoVisitados(num_vertices_, 0);
+    std::vector<int> vetoresNaoVisitados;
 
     marcado[v] = 1;
     pai[v] = -1;
@@ -205,19 +205,29 @@ void Grafo::busca_largura(int v, int timeToLive)
         int w = fila.front();
         fila.pop();
 
-        printf("%d\n", w);
         for (int u = 0; u < num_vertices_; u++)
         {
             if (eh_vizinho(w, u))
             {
                 if (marcado[u] == 0)
                 {
-                    marcado[u] = 1;
-                    pai[u] = w;
-                    distancia[u] = distancia[w] + 1;
-                    fila.push(u);
+                    if (timeToLive > 0){
+                        marcado[u] = 1;
+                        pai[u] = w;
+                        distancia[u] = distancia[w] + 1;
+                        fila.push(u);
+                        timeToLive--;
+                    }
+                    else{
+                        vetoresNaoVisitados.push_back(u);
+                    }    
                 }
             }
         }
     }
+    for (size_t i = 0; i<vetoresNaoVisitados.size(); i++){
+        
+        printf("Vertices não visitados: %d\n", vetoresNaoVisitados[i]);
+    }
+    return vetoresNaoVisitados;
 }
