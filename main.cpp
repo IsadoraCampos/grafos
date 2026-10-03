@@ -1,7 +1,6 @@
 #include "Grafo.h"
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -11,7 +10,7 @@ int main()
     {
         int num_vertices;
         int num_arestas;
-        int qtd_casos; 
+        int qtd_casos;
         vector<int> verticesEntrada;
         vector<int> timeToLive;
 
@@ -33,7 +32,6 @@ int main()
 
             verticesEntrada.push_back(v);
             timeToLive.push_back(ttl);
-
         }
 
         for (int i = 0; i < qtd_casos; i++)
@@ -42,8 +40,6 @@ int main()
             int ttl = timeToLive[i];
 
             vector<int> vertices = g.nao_recebem_mensagem(v, ttl);
-
-            sort(vertices.begin(), vertices.end());
 
             cout << v << " " << ttl << ":";
 
@@ -54,8 +50,6 @@ int main()
 
             cout << "\n";
         }
-        
-
     }
     catch (const exception &e)
     {

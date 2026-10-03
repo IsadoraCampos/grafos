@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 using namespace std;
 
@@ -186,13 +187,10 @@ bool Grafo::eh_conexo()
     return true;
 }
 
-std::vector<int> Grafo::nao_recebem_mensagem(int v, int timeToLive)
+void Grafo::busca_largura(int v, std::vector<int> &marcado, std::vector<int> &distancia)
 {
     queue<int> fila;
-    std::vector<int> marcado(num_vertices_, 0);
     std::vector<int> pai(num_vertices_, -1);
-    std::vector<int> distancia(num_vertices_, -1);
-    std::vector<int> vetoresNaoVisitados;
 
     marcado[v] = 1;
     pai[v] = -1;
@@ -203,11 +201,6 @@ std::vector<int> Grafo::nao_recebem_mensagem(int v, int timeToLive)
     {
         int w = fila.front();
         fila.pop();
-
-        if (timeToLive < distancia[w])
-        {
-            vetoresNaoVisitados.push_back(w);
-        }
 
         for (int u = 0; u < num_vertices_; u++)
         {
@@ -223,14 +216,23 @@ std::vector<int> Grafo::nao_recebem_mensagem(int v, int timeToLive)
             }
         }
     }
+}
+
+std::vector<int> Grafo::nao_recebem_mensagem(int v, int timeToLive)
+{
+    std::vector<int> marcado(num_vertices_, 0);
+    std::vector<int> distancia(num_vertices_, -1);
+    std::vector<int> vetoresNaoVisitados;
+    busca_largura(v, marcado, distancia);
 
     for (int i = 0; i < num_vertices_; i++)
     {
-        if (marcado[i] == 0)
+        if (marcado[i] == 0 || distancia[i] > timeToLive)
         {
             vetoresNaoVisitados.push_back(i);
         }
     }
 
+    sort(vetoresNaoVisitados.begin(), vetoresNaoVisitados.end());
     return vetoresNaoVisitados;
 }

@@ -25,6 +25,7 @@ public:
     bool eh_conexo();
 
     void busca_profundidade(int v, std::vector<int> &marcado);
+    void busca_largura(int v, std::vector<int> &marcado, std::vector<int> &distancia);
     std::vector<int> nao_recebem_mensagem(int v, int timeToLive);
 
 private:
