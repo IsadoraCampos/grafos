@@ -1,6 +1,7 @@
 #include "Grafo.h"
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -8,36 +9,53 @@ int main()
 {
     try
     {
-        Grafo g(6);
-        Aresta a1(1, 3);
-        Aresta a2(1, 5);
-        Aresta a3(3, 5);
+        int num_vertices;
+        int num_arestas;
+        int qtd_casos; 
+        vector<int> verticesEntrada;
+        vector<int> timeToLive;
 
-        g.inserir_aresta(a1);
-        g.inserir_aresta(a2);
-        g.inserir_aresta(a3);
+        cin >> num_vertices >> num_arestas;
+        Grafo g(num_vertices);
 
-        /*g.imprime();
-        if (g.eh_passeio({2, 0, 4, 1, 0, 4, 3}))
+        for (int i = 0; i < num_arestas; i++)
         {
-            cout << "Grafo é um passeio! \n";
+            int v1, v2;
+            cin >> v1 >> v2;
+            g.inserir_aresta(Aresta(v1, v2));
         }
-        else
-        {
-            cout << "Grafo não é um passeio! \n";
-        }*/
 
-        /*if (g.eh_caminho(0, 4, new int[g.num_vertices()]{0}, 0))
+        cin >> qtd_casos;
+        for (int i = 0; i < qtd_casos; i++)
         {
-            cout << "Grafo é um caminho! \n";
+            int v, ttl;
+            cin >> v >> ttl;
+
+            verticesEntrada.push_back(v);
+            timeToLive.push_back(ttl);
+
         }
-        else
+
+        for (int i = 0; i < qtd_casos; i++)
         {
-            cout << "Grafo não é um caminho! \n";
-        }*/
-        // vector<int> marcado(g.num_vertices(), 0);
-        // g.busca_profundidade(0, marcado);
-        g.busca_largura(5, 4);
+            int v = verticesEntrada[i];
+            int ttl = timeToLive[i];
+
+            vector<int> vertices = g.nao_recebem_mensagem(v, ttl);
+
+            sort(vertices.begin(), vertices.end());
+
+            cout << v << " " << ttl << ":";
+
+            for (size_t j = 0; j < vertices.size(); j++)
+            {
+                cout << " " << vertices[j];
+            }
+
+            cout << "\n";
+        }
+        
+
     }
     catch (const exception &e)
     {
